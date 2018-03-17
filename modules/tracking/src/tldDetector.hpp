@@ -56,7 +56,7 @@ namespace cv
 		const int MAX_EXAMPLES_IN_MODEL = 500;
 		const int MEASURES_PER_CLASSIFIER = 13;
 		const int GRIDSIZE = 15;
-		const int DOWNSCALE_MODE = cv::INTER_LINEAR;
+		const int DOWNSCALE_MODE = cv::INTER_LINEAR_EXACT;
         const double THETA_NN = 0.5;
 		const double CORE_THRESHOLD = 0.5;
         const double CLASSIFIER_MARGIN = 0.1;
@@ -103,7 +103,6 @@ namespace cv
 			{
 				Rect2d rect;
 				bool isObject, shouldBeIntegrated;
-                double Sc;
 			};
 			bool detect(const Mat& img, const Mat& imgBlurred, Rect2d& res, std::vector<LabeledPatch>& patches, Size initSize);
 			bool ocl_detect(const Mat& img, const Mat& imgBlurred, Rect2d& res, std::vector<LabeledPatch>& patches,  Size initSize);

@@ -116,7 +116,7 @@ CV_WRAP String OCRTesseract::run(InputArray image, InputArray mask, int min_conf
     run(image_m, mask_m, output1, NULL, &component_texts, &component_confidences, component_level);
     for(unsigned int i = 0; i < component_texts.size(); i++)
     {
-        cout << "confidence: " << component_confidences[i] << " text:" << component_texts[i] << endl;
+        // cout << "confidence: " << component_confidences[i] << " text:" << component_texts[i] << endl;
 
         if(component_confidences[i] > min_confidence)
         {
@@ -200,7 +200,8 @@ public:
         char *outText;
         outText = tess.GetUTF8Text();
         output = string(outText);
-        delete [] outText;
+        if (outText != NULL)
+            delete [] outText;
 
         if ( (component_rects != NULL) || (component_texts != NULL) || (component_confidences != NULL) )
         {
@@ -227,8 +228,8 @@ public:
 
                     delete[] word;
                 } while (ri->Next(level));
+                delete ri;
             }
-            delete ri;
         }
 
         tess.Clear();
